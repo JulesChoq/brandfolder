@@ -12,8 +12,6 @@
 'use strict';
 const ConversePluginsSDK = require('@converseai/plugins-sdk');
 const RegProviders       = require('./converseai_providers');
-const list_filetypes = require('./converseai_modules/list_filetypes');
-const converseai_providers = require('./converseai_providers');
 
 /**
  * marketsharedemo_brandfolder plugin. To be used with
@@ -44,9 +42,9 @@ exports.marketsharedemo_brandfolder = function (request, response) {
 
     app.setModules({
       list_users: require('./converseai_modules/list_users'),
+      list_filetypes: require('./converseai_modules/list_filetypes'),
       search_assets: require('./converseai_modules/search_assets'),
-      list_tags: require('./converseai_modules/list_tags'),
-      list_filetypes: require('./converseai_modules/list_filetypes')
+      list_tags: require('./converseai_modules/list_tags')
     });
 
 

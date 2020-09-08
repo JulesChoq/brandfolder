@@ -10,6 +10,7 @@ const request     = require('supertest');
 const expect      = require('chai').expect;
 const server      = require('./lib/express');
 const {token, org_id} = require('../lib/env');
+const list_filetypes = require('../converseai_modules/list_filetypes');
 
 
 describe('Search Assets', function () {
@@ -22,7 +23,8 @@ describe('Search Assets', function () {
         payload: {
           moduleId: 'search_assets',
           moduleParam: {
-            tags: 'Smartsheet,Moon'
+            tags: 'Smartsheet,Moon',
+            filetypes: 'jpg,png'
           },
           registrationData: {
             token,
@@ -45,7 +47,9 @@ describe('Search Assets', function () {
         payload: {
           moduleId: 'search_assets',
           moduleParam: {
-            tags: '["Smartsheet","Moon"]'
+            tags: '["Smartsheet","Moon"]',
+            filetypes: '["jpg","png"]'
+            
           },
           registrationData: {
             token,
@@ -69,7 +73,8 @@ describe('Search Assets', function () {
         payload: {
           moduleId: 'search_assets',
           moduleParam: {
-            tags: ["Smartsheet", "Moon"]
+            tags: ["Smartsheet", "Moon"],
+            filetypes: ["jpg","png"]
           },
           registrationData: {
             token,

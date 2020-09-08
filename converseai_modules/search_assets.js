@@ -28,6 +28,18 @@ module.exports = function search_assets (app, body) {
     tags=tags.join()
   }
 
+/** @type {String} filetypes to search for (can accept array, csv 
+  * or string)   */
+ var filetypes = body.payload.moduleParam.filetypes;
+ var filetypes = body.payload.moduleParam.filetypes;
+ if(filetypes.includes('[')){
+   filetypes = filetypes.replace(/\[/g,'').replace(/\]/g,'');
+ }
+
+ if(typeof filetypes==='object'){
+   filetypes=filetypes.join()
+ }
+
   if (token != undefined && org_id != undefined) { 
     /** @type {ModuleResponse} response The Converse AI response to respond with. */
     var response = new ModuleResponse();
@@ -38,7 +50,7 @@ module.exports = function search_assets (app, body) {
         'Content-Type': 'application/json',
       },
       qs: {
-        search: tags,
+        search: tags && filetypes,
         fields: 'cdn_url',
         include: 'brandfolder,section,collections,attachments,tags,custom_fields'
       },

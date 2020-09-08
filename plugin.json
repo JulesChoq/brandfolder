@@ -55,6 +55,13 @@
           "description": "Tags to search for (can accept array, csv or string) ",
           "type": "STRING",
           "optional": true
+        },
+        {
+          "param": "filetypes",
+          "displayName": "Filetypes",
+          "description": "Filetypes to search for (can accept array, csv or string) ",
+          "type": "STRING",
+          "optional": true
         }
       ]
     },
