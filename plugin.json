@@ -37,6 +37,13 @@
       "param": []
     },
     {
+      "id": "list_filetypes",
+      "name": "List Filetypes",
+      "description": "Lists all filetypes in Brandfolder ",
+      "hasReturn": true,
+      "param": []
+    },
+    {
       "id": "search_assets",
       "name": "Search Assets",
       "description": "Searches Brandfolder Assets by tags",

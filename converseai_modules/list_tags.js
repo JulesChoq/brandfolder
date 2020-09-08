@@ -22,7 +22,7 @@ module.exports = function list_tags(app, body) {
     /** @type {ModuleResponse} response The Converse AI response to respond with. */
     const response = new ModuleResponse();
     const options = {
-      url:`https://brandfolder.com/api/v4/brandfolders/${brandfolder_id}/searchable_things?clear_cache=false&queue_priority=high`,
+      url:`https://brandfolder.com/api/v4/brandfolders/${brandfolder_id}/searchable_things`,
       headers:{
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -31,8 +31,7 @@ module.exports = function list_tags(app, body) {
     }
     
     request.get(options).then(result=> { 
-      const tags= result.tags.map(element => element.name);
-      response.setValue({tags});
+      response.setValue({result: result.tags});
       app.send(Status.SUCCESS, response);
         }).catch(err=>{
           console.error(err)
