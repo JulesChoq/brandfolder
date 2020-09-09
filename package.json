@@ -3,7 +3,7 @@
   "description": "Integration with Brandfolder API",
   "main": "plugin.js",
   "scripts": {
-    "test": "mocha test/plugin-test.js 'test/**/*-test.js'"
+    "test": "mocha --timeout 50000 test/plugin-test.js 'test/**/*-test.js'"
   },
   "dependencies": {
     "@converseai/plugins-sdk": "latest",

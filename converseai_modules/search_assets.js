@@ -19,27 +19,39 @@ module.exports = function search_assets (app, body) {
 
   /** @type {String} tags Tags to search for (can accept array, csv 
   * or string)   */
-  var tags = body.payload.moduleParam.tags;
+  var tags = body.payload.moduleParam.tags || [];
   if(tags.includes('[')){
     tags = tags.replace(/\[/g,'').replace(/\]/g,'');
   }
 
   if(typeof tags==='object'){
-    tags=tags.join()
+    tags=tags.join(' ')
   }
 
 /** @type {String} filetypes to search for (can accept array, csv 
   * or string)   */
- var filetypes = body.payload.moduleParam.filetypes;
- var filetypes = body.payload.moduleParam.filetypes;
+ var filetypes = body.payload.moduleParam.filetypes || [];
  if(filetypes.includes('[')){
    filetypes = filetypes.replace(/\[/g,'').replace(/\]/g,'');
  }
-
+ 
  if(typeof filetypes==='object'){
-   filetypes=filetypes.join()
+   filetypes=filetypes.join(' ')
  }
 
+let search
+ if(tags && filetypes){
+  search= `tags.strict:"${tags}" AND filetype.strict:"${filetypes}"`
+ }
+ 
+ if(tags && !filetypes){
+  search= `tags.strict:"${tags}"`
+ }
+ 
+ if(!tags && filetypes){
+  search= `filetype.strict:"${filetypes}"`
+ }
+ 
   if (token != undefined && org_id != undefined) { 
     /** @type {ModuleResponse} response The Converse AI response to respond with. */
     var response = new ModuleResponse();
@@ -50,9 +62,9 @@ module.exports = function search_assets (app, body) {
         'Content-Type': 'application/json',
       },
       qs: {
-        search: tags && filetypes,
+        search,
         fields: 'cdn_url',
-        include: 'brandfolder,section,collections,attachments,tags,custom_fields'
+        //include: 'brandfolder,section,collections,attachments,tags,custom_fields'
       },
       json: true
     }
