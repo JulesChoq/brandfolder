@@ -12,7 +12,7 @@
 
 const express     = require('express');
 const bodyParser  = require('body-parser');
-const brandfolder  = require('../../').marketsharedemo_brandfolder;
+const brandfolder  = require('../../').mbfdemo_brandfolder;
 
 var app = express();
 app.use(bodyParser.json({ 

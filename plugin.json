@@ -71,6 +71,21 @@
       "description": "Lists all tags in Brandfolder",
       "hasReturn": true,
       "param": []
+    },
+    {
+      "id": "get_attachments",
+      "name": "Get Attachments",
+      "description": "Gets the attachments for an asset in Brandfolder.",
+      "hasReturn": true,
+      "param": [
+        {
+          "param": "asset",
+          "displayName": "Asset",
+          "description": "The asset ID for which we will fetch the attachments.",
+          "type": "STRING",
+          "optional": false
+        }
+      ]
     }
   ],
   "webhooks": [],
