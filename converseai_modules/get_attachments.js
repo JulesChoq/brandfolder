@@ -15,22 +15,22 @@ const request         = require('request-promise');
 
 module.exports = function get_attachments (app, body) {
   /** @type {String} token Brandfolder API Token  */
-  var token = body.payload.registrationData.token;
+  const token = body.payload.registrationData.token;
 
   /** @type {String} brandfolderId ID for a brandfolder  */
-  var brandfolderId = body.payload.registrationData.brandfolder_id;
+  const brandfolderId = body.payload.registrationData.brandfolder_id;
 
   /** @type {String} orgId OrgID  */
-  var orgId = body.payload.registrationData.org_id;
+  const orgId = body.payload.registrationData.org_id;
 
 
   /** @type {String} asset The asset ID for which we will fetch the 
   * attachments.  */
-  var asset = body.payload.moduleParam.asset;
+  const asset = body.payload.moduleParam.asset;
 
   if (token != undefined && brandfolderId != undefined && orgId != undefined && asset != undefined) { 
     /** @type {ModuleResponse} response The Converse AI response to respond with. */
-    var response = new ModuleResponse();
+    const response = new ModuleResponse();
   const options = {
     url:`https://brandfolder.com/api/v4/assets/${asset}/attachments`,
     headers:{
