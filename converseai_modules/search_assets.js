@@ -52,6 +52,10 @@ let search
   search= `filetype.strict:"${filetypes}"`
  }
  
+ if(!tags && !filetypes){
+  search = null;
+ }
+ 
   if (token != undefined && org_id != undefined) { 
     /** @type {ModuleResponse} response The Converse AI response to respond with. */
     var response = new ModuleResponse();
