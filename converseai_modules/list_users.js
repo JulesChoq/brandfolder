@@ -31,7 +31,7 @@ module.exports = function list_users (app, body) {
       json: true
     }
 
-    fetch(`https://brandfolder.com/api/v4/organizations/${org_id}/`, options).then(result => {
+    fetch(`https://brandfolder.com/api/v4/organizations/${org_id}`, options).then(result => {
       response.setValue(result);
       app.send(Status.SUCCESS, response);
     }).catch(err => {

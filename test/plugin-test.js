@@ -7,7 +7,7 @@
  * IMPORTANT: THIS FILE IS AUTO GENERATED, CHANGES MAY BE OVERRIDDEN!
  */
 
-const request         = require('supertest');
+const request     = require('supertest');
 const expect      = require('chai').expect;
 const server      = require('./lib/express');
 
@@ -37,9 +37,6 @@ describe('Brandfolder', function () {
       .set('X_CONVERSE_APP_TOKEN', require('../app-token'))
       .expect(200)
       .end(function(err, res) {
-        if (err) {
-          console.error(err)
-        }
         expect(res.body).to.have.property('status').to.equal(1);
         done();
       });
@@ -52,9 +49,6 @@ describe('Brandfolder', function () {
       .set('X_CONVERSE_APP_TOKEN', require('../app-token'))
       .expect(200)
       .end(function(err, res) {
-        if (err) {
-          console.error(err)
-        }
         expect(res.body).to.have.property('status').to.equal(1);
         done();
       });
@@ -67,9 +61,6 @@ describe('Brandfolder', function () {
       .set('X_CONVERSE_APP_TOKEN', require('../app-token'))
       .expect(200)
       .end(function(err, res) {
-        if (err) {
-          console.error(err)
-        }
         expect(res.body).to.have.property('status').to.equal(0);
         done();
       });
