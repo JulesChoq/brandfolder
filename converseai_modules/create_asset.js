@@ -27,6 +27,8 @@ module.exports = function create_asset (app, body) {
     font_color,
     background_color,
     h_size,
+
+    
     v_size
   } = body.payload.moduleParam;
 
