@@ -45,7 +45,7 @@ module.exports = function search_assets (app, body) {
   }
   
   if(tags && !filetypes){
-    search= `tags.strict:"${tags}"`
+    search= `tags.strict:${tags}`
   }
   
   if(!tags && filetypes){
@@ -74,6 +74,9 @@ module.exports = function search_assets (app, body) {
 
     fetch(`https://brandfolder.com/api/v4/organizations/${org_id}/assets`, options).then(result => {
       response.setValue(result);
+      console.log(options);
+      console.log(response);
+      console.log(result);
       app.send(Status.SUCCESS, response);
     }).catch(err => {
       console.error(err)
