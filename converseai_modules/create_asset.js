@@ -10,7 +10,7 @@
 
 const Status          = require('@converseai/plugins-sdk').Status;
 const ModuleResponse  = require('@converseai/plugins-sdk').Payloads.Module.ModuleResponse;
-const fetch = require('node-fetch')
+const fetch = require('node-fetch');
 
 module.exports = function create_asset (app, body) {
   const {
@@ -28,13 +28,34 @@ module.exports = function create_asset (app, body) {
     font_color,
     background_color,
     h_size,
-
-    
     v_size
   } = body.payload.moduleParam;
 
   if (token != undefined) { 
     const response = new ModuleResponse();
+
+    const options = {
+      method: 'POST',
+      body: {
+        data: {
+          attributes: [
+            {
+              name,
+              description,
+              attachments
+            }
+          ]
+        },
+        section_key: section_id
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    }
+
+    // fetch()
 
     response.setValue({});
     app.send(Status.SUCCESS, response);

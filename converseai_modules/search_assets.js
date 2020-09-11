@@ -15,9 +15,10 @@ const fetch           = require('node-fetch');
 module.exports = function search_assets (app, body) {
   const {
     token,
-    org_id,
-    operator
+    org_id
   } = body.payload.registrationData;
+
+  const operator = body.payload.moduleParam.operator;
 
   let tags = body.payload.moduleParam.tags || [];
   if(tags.includes('[')){
@@ -37,6 +38,7 @@ module.exports = function search_assets (app, body) {
     filetypes=filetypes.join(' ')
   }
 
+  console.log(operator)
   let search
   if(tags && filetypes){
     search= `tags.strict:"${tags}" ${operator} filetype.strict:"${filetypes}"`

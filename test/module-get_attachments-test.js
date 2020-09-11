@@ -6,7 +6,7 @@
  * Plugins SDK. https://developers.converse.ai/
  */
 
-const request         = require('supertest');
+const request     = require('supertest');
 const expect      = require('chai').expect;
 const server      = require('./lib/express');
 const { token, org_id, brandfolder_id } = require('../lib/env');
