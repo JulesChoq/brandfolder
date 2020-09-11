@@ -13,13 +13,12 @@ const ModuleResponse  = require('@converseai/plugins-sdk').Payloads.Module.Modul
 const request         = require('request-promise');
 
 module.exports = function search_assets (app, body) {
+  const {
+    token,
+    org_id
+  } = body.payload.registrationData;
 
-  /** @type {String} token Brandfolder API Token  and org_id */
-  const {token,org_id} = body.payload.registrationData;
-
-  /** @type {String} tags Tags to search for (can accept array, csv 
-  * or string)   */
-  var tags = body.payload.moduleParam.tags || [];
+  let tags = body.payload.moduleParam.tags || [];
   if(tags.includes('[')){
     tags = tags.replace(/\[/g,'').replace(/\]/g,'');
   }
@@ -28,37 +27,35 @@ module.exports = function search_assets (app, body) {
     tags=tags.join(' ')
   }
 
-/** @type {String} filetypes to search for (can accept array, csv 
-  * or string)   */
- var filetypes = body.payload.moduleParam.filetypes || [];
- if(filetypes.includes('[')){
-   filetypes = filetypes.replace(/\[/g,'').replace(/\]/g,'');
- }
- 
- if(typeof filetypes==='object'){
-   filetypes=filetypes.join(' ')
- }
+  let filetypes = body.payload.moduleParam.filetypes || [];
+  if(filetypes.includes('[')){
+    filetypes = filetypes.replace(/\[/g,'').replace(/\]/g,'');
+  }
+  
+  if(typeof filetypes==='object'){
+    filetypes=filetypes.join(' ')
+  }
 
-let search
- if(tags && filetypes){
-  search= `tags.strict:"${tags}" AND filetype.strict:"${filetypes}"`
- }
- 
- if(tags && !filetypes){
-  search= `tags.strict:"${tags}"`
- }
- 
- if(!tags && filetypes){
-  search= `filetype.strict:"${filetypes}"`
- }
- 
- if(!tags && !filetypes){
-  search = null;
- }
+  let search
+  if(tags && filetypes){
+    search= `tags.strict:"${tags}" AND filetype.strict:"${filetypes}"`
+  }
+  
+  if(tags && !filetypes){
+    search= `tags.strict:"${tags}"`
+  }
+  
+  if(!tags && filetypes){
+    search= `filetype.strict:"${filetypes}"`
+  }
+  
+  if(!tags && !filetypes){
+    search = null;
+  }
  
   if (token != undefined && org_id != undefined) { 
-    /** @type {ModuleResponse} response The Converse AI response to respond with. */
-    var response = new ModuleResponse();
+    const response = new ModuleResponse();
+
     const options = {
       url:`https://brandfolder.com/api/v4/organizations/${org_id}/assets`,
       headers:{
@@ -67,19 +64,18 @@ let search
       },
       qs: {
         search,
-        fields: 'cdn_url',
-        //include: 'brandfolder,section,collections,attachments,tags,custom_fields'
+        fields: 'cdn_url'
       },
       json: true
     }
-    request.get(options).then(result=> {
 
-        response.setValue(result);
-        app.send(Status.SUCCESS, response);
-        }).catch(err=>{
-          console.error(err)
-          app.fail({ httpStatus: err.statusCode, message: err.error.errors}); 
-        })
+    request.get(options).then(result => {
+      response.setValue(result);
+      app.send(Status.SUCCESS, response);
+    }).catch(err => {
+      console.error(err)
+      app.fail({ httpStatus: err.statusCode, message: err.error.errors}); 
+    })
   } else { 
     app.fail({ httpStatus: 400, code: 'REQUIRED_PARAMS_UNDEFINED', description: 'Required parameters are undefined.' }); 
   }

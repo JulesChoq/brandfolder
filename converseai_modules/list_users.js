@@ -13,14 +13,15 @@ const ModuleResponse  = require('@converseai/plugins-sdk').Payloads.Module.Modul
 const request         = require('request-promise');
 
 module.exports = function list_users (app, body) {
-
-  /** @type {String} token Brandfolder API Token  */
-  const {token, org_id} = body.payload.registrationData;
+  const {
+    token,
+    org_id
+  } = body.payload.registrationData;
 
   
   if (token != undefined && org_id != undefined) { 
-    /** @type {ModuleResponse} response The Converse AI response to respond with. */
     const response = new ModuleResponse();
+
     const options = {
       url:`https://brandfolder.com/api/v4/organizations/${org_id}/`,
       headers:{
@@ -29,14 +30,14 @@ module.exports = function list_users (app, body) {
       },
       json: true
     }
-    request.get(options).then(result=> {
+
+    request.get(options).then(result => {
       response.setValue(result);
       app.send(Status.SUCCESS, response);
-        }).catch(err=>{
-          console.error(err)
-          app.fail({ httpStatus: err.statusCode, message: err.error.errors}); 
-        })
-    
+    }).catch(err => {
+      console.error(err)
+      app.fail({ httpStatus: err.statusCode, message: err.error.errors}); 
+    })
   } else { 
     app.fail({ httpStatus: 400, code: 'REQUIRED_PARAMS_UNDEFINED', description: 'Required parameters are undefined.' }); 
   }

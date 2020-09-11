@@ -10,15 +10,15 @@
 const Status                    = require('@converseai/plugins-sdk').Status;
 const RegistrationDataResponse  = require('@converseai/plugins-sdk').Payloads.RegistrationDataResponse;
 
-var onProviderRegister = function(app, body) {
+const onProviderRegister = function(app, body) {
  /**
   * Registration parameters assigned to body.payload.registrationData.
   * @example
-  * var regOne = body.payload.registrationData.regOne;
+  * const regOne = body.payload.registrationData.regOne;
   */
 
   /** @type {RegistrationDataResponse} response The Converse AI response to respond with. */
-  var response = new RegistrationDataResponse();
+  const response = new RegistrationDataResponse();
 
   /*
   * Set the registrationData for the provider. It's important to return all
@@ -35,11 +35,11 @@ var onProviderRegister = function(app, body) {
   app.send(Status.SUCCESS, response);
 }
 
-var onProviderUnregister = function(app, body) {
+const onProviderUnregister = function(app, body) {
  /**
   * Registration parameters assigned to body.payload.registrationData.
   * @example
-  * var regOne = body.payload.registrationData.regOne;
+  * const regOne = body.payload.registrationData.regOne;
   */
 
   /*

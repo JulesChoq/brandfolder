@@ -9,7 +9,7 @@
 const request     = require('supertest');
 const expect      = require('chai').expect;
 const server      = require('./lib/express');
-const {token, org_id} = require('../lib/env');
+const { token, org_id } = require('../lib/env');
 const list_filetypes = require('../converseai_modules/list_filetypes');
 
 
@@ -29,11 +29,15 @@ describe('Search Assets', function () {
           registrationData: {
             token,
             org_id
-          }        }
+          }
+        }
       })
       .set('X_CONVERSE_APP_TOKEN', require('../app-token'))
       .expect(200)
       .end(function(err, res) {
+        if (err) {
+          console.error(err)
+        }
         expect(res.body).to.have.property('status').to.equal(0);
         expect(res.body).to.have.property('value');
         done();

@@ -14,39 +14,33 @@ const request         = require('request-promise');
 
 
 module.exports = function get_attachments (app, body) {
-  /** @type {String} token Brandfolder API Token  */
-  const token = body.payload.registrationData.token;
+  const {
+    token,
+    brandfolder_id,
+    org_id
+  } = body.payload.registrationData;
 
-  /** @type {String} brandfolderId ID for a brandfolder  */
-  const brandfolderId = body.payload.registrationData.brandfolder_id;
-
-  /** @type {String} orgId OrgID  */
-  const orgId = body.payload.registrationData.org_id;
-
-
-  /** @type {String} asset The asset ID for which we will fetch the 
-  * attachments.  */
   const asset = body.payload.moduleParam.asset;
 
-  if (token != undefined && brandfolderId != undefined && orgId != undefined && asset != undefined) { 
-    /** @type {ModuleResponse} response The Converse AI response to respond with. */
+  if (token != undefined && brandfolder_id != undefined && org_id != undefined && asset != undefined) { 
     const response = new ModuleResponse();
-  const options = {
-    url:`https://brandfolder.com/api/v4/assets/${asset}/attachments`,
-    headers:{
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    json: true,
-  }
 
-  request.get(options).then(result=> {
-    response.setValue(result);
-    app.send(Status.SUCCESS, response);
-  }).catch(err=>{
-    console.error(err)
-    app.fail({ httpStatus: err.statusCode, message: err.error.errors}); 
-  })
+    const options = {
+      url:`https://brandfolder.com/api/v4/assets/${asset}/attachments`,
+      headers:{
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      json: true,
+    }
+
+    request.get(options).then(result => {
+      response.setValue(result);
+      app.send(Status.SUCCESS, response);
+    }).catch(err => {
+      console.error(err)
+      app.fail({ httpStatus: err.statusCode, message: err.error.errors}); 
+    })
   } else { 
     app.fail({ httpStatus: 400, code: 'REQUIRED_PARAMS_UNDEFINED', description: 'Required parameters are undefined.' }); 
   }

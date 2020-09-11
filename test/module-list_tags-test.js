@@ -9,7 +9,7 @@
 const request     = require('supertest');
 const expect      = require('chai').expect;
 const server      = require('./lib/express');
-const {token, org_id,brandfolder_id} = require('../lib/env');
+const { token, org_id, brandfolder_id } = require('../lib/env');
 
 
 describe('List Tags', function () {
@@ -27,11 +27,15 @@ describe('List Tags', function () {
             token: token,
             org_id: org_id,
             brandfolder_id:brandfolder_id,
-          }        }
+          }
+        }
       })
       .set('X_CONVERSE_APP_TOKEN', require('../app-token'))
       .expect(200)
       .end(function(err, res) {
+        if (err) {
+          console.error(err)
+        }
         expect(res.body).to.have.property('status').to.equal(0);
         expect(res.body).to.have.property('value');
         done();

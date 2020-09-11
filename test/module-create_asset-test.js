@@ -40,6 +40,9 @@ describe('Create Asset', function () {
       .set('X_CONVERSE_APP_TOKEN', require('../app-token'))
       .expect(200)
       .end(function(err, res) {
+        if (err) {
+          console.error(err)
+        }
         expect(res.body).to.have.property('status').to.equal(0);
         expect(res.body).to.have.property('value');
         done();
