@@ -27,11 +27,12 @@ module.exports = function list_tags(app, body) {
       headers:{
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-      },      
-      json: true
+      }
     }
     
-    fetch(`https://brandfolder.com/api/v4/brandfolders/${brandfolder_id}/searchable_things`, options).then(result => { 
+    fetch(`https://brandfolder.com/api/v4/brandfolders/${brandfolder_id}/searchable_things`, options).then(result => {
+      return result.json()
+    }).then(result => {
       response.setValue({ result: result.filetypes });
       app.send(Status.SUCCESS, response);
     }).catch(err => {

@@ -22,23 +22,26 @@ module.exports = function search_assets (app, body) {
 
   let tags = body.payload.moduleParam.tags || [];
   if(tags.includes('[')){
-    tags = tags.replace(/\[/g,'').replace(/\]/g,'');
+    tags = tags.replace(/\[/g,'').replace(/\]/g,'').replace(/\,/g, ' ').replace(/\"/g, '');
   }
 
   if(typeof tags==='object'){
-    tags=tags.join(' ')
+    tags = tags.join(' ').replace(/\,/g, '').replace(/\"/g, '')
+  } else {
+    tags = tags.replace(/\,/g, ' ').replace(/\"/g, '')
   }
 
   let filetypes = body.payload.moduleParam.filetypes || [];
   if(filetypes.includes('[')){
-    filetypes = filetypes.replace(/\[/g,'').replace(/\]/g,'');
+    filetypes = filetypes.replace(/\[/g,'').replace(/\]/g,'').replace(/\,/g, ' ').replace(/\"/g, '');
   }
   
   if(typeof filetypes==='object'){
-    filetypes=filetypes.join(' ')
+    filetypes = filetypes.join(' ').replace(/\,/g, ' ').replace(/\"/g, '')
+  } else {
+    filetypes = filetypes.replace(/\,/g, ' ').replace(/\"/g, '')
   }
 
-  console.log(operator)
   let search
   if(tags && filetypes){
     search= `tags.strict:"${tags}" ${operator} filetype.strict:"${filetypes}"`
@@ -59,24 +62,25 @@ module.exports = function search_assets (app, body) {
   if (token != undefined && org_id != undefined) { 
     const response = new ModuleResponse();
 
+    const params = new URLSearchParams({
+      search,
+      fields: 'cdn_url'
+    }).toString();
+
+    const url = `https://brandfolder.com/api/v4/organizations/${org_id}/assets?` + params;
+  
     const options = {
       method: 'GET',
       headers:{
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-      },
-      qs: {
-        search,
-        fields: 'cdn_url'
-      },
-      json: true
+      }
     }
 
-    fetch(`https://brandfolder.com/api/v4/organizations/${org_id}/assets`, options).then(result => {
+    fetch(url, options).then(result => {
+      return result.json()
+    }).then(result => {
       response.setValue(result);
-      console.log(options);
-      console.log(response);
-      console.log(result);
       app.send(Status.SUCCESS, response);
     }).catch(err => {
       console.error(err)

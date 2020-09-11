@@ -27,11 +27,12 @@ module.exports = function list_users (app, body) {
       headers:{
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-      },
-      json: true
+      }
     }
 
     fetch(`https://brandfolder.com/api/v4/organizations/${org_id}`, options).then(result => {
+      return result.json()
+    }).then(result => {
       response.setValue(result);
       app.send(Status.SUCCESS, response);
     }).catch(err => {

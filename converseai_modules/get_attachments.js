@@ -30,11 +30,12 @@ module.exports = function get_attachments (app, body) {
       headers:{
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
-      },
-      json: true,
+      }
     }
 
     fetch(`https://brandfolder.com/api/v4/assets/${asset}/attachments`, options).then(result => {
+      return result.json()
+    }).then(result => {
       response.setValue(result);
       app.send(Status.SUCCESS, response);
     }).catch(err => {

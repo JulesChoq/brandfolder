@@ -55,7 +55,9 @@ module.exports = function create_asset (app, body) {
       }
     }
 
-    // fetch()
+    // fetch(`https://brandfolder.com/api/v4/brandfolders/${brandfolder_id}/assets`, options).then(result => {
+
+    // })
 
     response.setValue({});
     app.send(Status.SUCCESS, response);

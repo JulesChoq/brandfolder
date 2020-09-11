@@ -23,7 +23,7 @@ describe('Search Assets', function () {
         payload: {
           moduleId: 'search_assets',
           moduleParam: {
-            tags: 'Smartsheet,Moon',
+            tags: 'Moon',
             filetypes: 'jpg,png',
             operator: 'OR'
           },
@@ -52,14 +52,15 @@ describe('Search Assets', function () {
         payload: {
           moduleId: 'search_assets',
           moduleParam: {
-            tags: '["Smartsheet","Moon"]',
-            filetypes: '["jpg","png"]'
-            
+            tags: '["Moon"]',
+            filetypes: '["jpg","png"]',
+            operator: 'OR'
           },
           registrationData: {
             token,
             org_id
-          }        }
+          }
+        }
       })
       .set('X_CONVERSE_APP_TOKEN', require('../app-token'))
       .expect(200)
@@ -78,13 +79,15 @@ describe('Search Assets', function () {
         payload: {
           moduleId: 'search_assets',
           moduleParam: {
-            tags: ["Smartsheet", "Moon"],
-            filetypes: ["jpg","png"]
+            tags: ["Moon"],
+            filetypes: ["jpg","png"],
+            operator: 'OR'
           },
           registrationData: {
             token,
             org_id
-          }        }
+          }
+        }
       })
       .set('X_CONVERSE_APP_TOKEN', require('../app-token'))
       .expect(200)
