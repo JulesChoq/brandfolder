@@ -24,7 +24,8 @@ describe('Search Assets', function () {
           moduleId: 'search_assets',
           moduleParam: {
             tags: 'Smartsheet,Moon',
-            filetypes: 'jpg,png'
+            filetypes: 'jpg,png',
+            operator: 'OR'
           },
           registrationData: {
             token,

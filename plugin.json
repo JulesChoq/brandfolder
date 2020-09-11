@@ -32,14 +32,14 @@
     {
       "id": "list_users",
       "name": "List Users",
-      "description": "List Users ",
+      "description": "List Users",
       "hasReturn": true,
       "param": []
     },
     {
       "id": "list_filetypes",
       "name": "List Filetypes",
-      "description": "Lists all filetypes in Brandfolder ",
+      "description": "Lists all filetypes in Brandfolder",
       "hasReturn": true,
       "param": []
     },
@@ -52,16 +52,28 @@
         {
           "param": "tags",
           "displayName": "Tags",
-          "description": "Tags to search for (can accept array, csv or string) ",
+          "description": "Tags to search for (can accept array, csv or string)",
           "type": "STRING",
           "optional": true
         },
         {
           "param": "filetypes",
           "displayName": "Filetypes",
-          "description": "Filetypes to search for (can accept array, csv or string) ",
+          "description": "Filetypes to search for (can accept array, csv or string)",
           "type": "STRING",
           "optional": true
+        },
+        {
+          "param": "operator",
+          "displayName": "Search Operator",
+          "description": "Determine if you want tags AND/OR filetypes.",
+          "type": "ENUM",
+          "optional": true,
+          "hideExpression": "model.tags.value !== undefined && model.filetypes.value !== undefined",
+          "paramValues": [
+            "And",
+            "OR"
+          ]
         }
       ]
     },
