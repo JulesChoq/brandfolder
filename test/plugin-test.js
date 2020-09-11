@@ -7,7 +7,7 @@
  * IMPORTANT: THIS FILE IS AUTO GENERATED, CHANGES MAY BE OVERRIDDEN!
  */
 
-const request     = require('supertest');
+const request         = require('supertest');
 const expect      = require('chai').expect;
 const server      = require('./lib/express');
 

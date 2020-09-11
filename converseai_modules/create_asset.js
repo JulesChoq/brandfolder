@@ -10,6 +10,7 @@
 
 const Status          = require('@converseai/plugins-sdk').Status;
 const ModuleResponse  = require('@converseai/plugins-sdk').Payloads.Module.ModuleResponse;
+const fetch = require('node-fetch')
 
 module.exports = function create_asset (app, body) {
   const {
@@ -33,11 +34,8 @@ module.exports = function create_asset (app, body) {
   } = body.payload.moduleParam;
 
   if (token != undefined) { 
-    /** @type {ModuleResponse} response The Converse AI response to respond with. */
     const response = new ModuleResponse();
 
-    
-  
     response.setValue({});
     app.send(Status.SUCCESS, response);
   } else { 

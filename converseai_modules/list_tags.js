@@ -10,7 +10,7 @@
 
 const Status          = require('@converseai/plugins-sdk').Status;
 const ModuleResponse  = require('@converseai/plugins-sdk').Payloads.Module.ModuleResponse;
-const request         = require('request-promise');
+const fetch           = require('node-fetch');
 
 module.exports = function list_tags(app, body) {
   const {
@@ -23,7 +23,7 @@ module.exports = function list_tags(app, body) {
     const response = new ModuleResponse();
 
     const options = {
-      url:`https://brandfolder.com/api/v4/brandfolders/${brandfolder_id}/searchable_things`,
+      method: 'GET',
       headers:{
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ module.exports = function list_tags(app, body) {
       json: true
     }
     
-    request.get(options).then(result => { 
+    fetch(`https://brandfolder.com/api/v4/brandfolders/${brandfolder_id}/searchable_things`, options).then(result => { 
       response.setValue({ result: result.tags });
       app.send(Status.SUCCESS, response);
     }).catch(err => {
