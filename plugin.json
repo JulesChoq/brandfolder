@@ -86,6 +86,94 @@
           "optional": false
         }
       ]
+    },
+    {
+      "id": "create_asset",
+      "name": "Create Asset",
+      "description": "Create a new asset in Brandfolder.",
+      "hasReturn": true,
+      "param": [
+        {
+          "param": "name",
+          "displayName": "Name",
+          "description": "Name of the asset.",
+          "type": "STRING",
+          "optional": false
+        },
+        {
+          "param": "description",
+          "displayName": "Description",
+          "description": "Detailed description of asset.",
+          "type": "STRING",
+          "optional": true
+        },
+        {
+          "param": "primary_attachment",
+          "displayName": "Primary Attachment",
+          "description": "(Optional) The main attachment to be used as the hero/thumbnail image. If left empty, a placeholder image with name and size will be used.",
+          "type": "STRING",
+          "optional": true
+        },
+        {
+          "param": "attachments",
+          "displayName": "Attachments",
+          "description": "(Optional) An array of attachments in URL format.",
+          "type": "STRING",
+          "optional": true
+        },
+        {
+          "param": "section_id",
+          "displayName": "Section ID",
+          "description": "(Optional) The ID of the section to place the asset.",
+          "type": "STRING",
+          "optional": true
+        },
+        {
+          "param": "placeholder",
+          "displayName": "Placeholder",
+          "description": "Placeholder image to upload to Brandfolder.",
+          "type": "PARAM",
+          "hideExpression": "model.primary_attachment.value !== undefined",
+          "optional": true,
+          "valueParams": [
+            {
+              "param": "placeholder_text",
+              "displayName": "Placeholder Text",
+              "description": "The text on the placeholder image.",
+              "type": "STRING",
+              "optional": true
+            },
+            {
+              "param": "font_color",
+              "displayName": "Font Color",
+              "description": "The font color of the placeholder image.",
+              "type": "STRING",
+              "optional": true
+            },
+            {
+              "param": "background_color",
+              "displayName": "Background Color",
+              "description": "The background color of the placeholder image.",
+              "type": "STRING",
+              "optional": true
+            },
+            {
+              "param": "h_size",
+              "displayName": "Horizontal",
+              "description": "The horizontal size in pixels.",
+              "type": "STRING",
+              "optional": true
+            },
+            {
+              "param": "v_size",
+              "displayName": "Vertical",
+              "description": "The vertical size in pixels.",
+              "type": "STRING",
+              "optional": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "webhooks": [],

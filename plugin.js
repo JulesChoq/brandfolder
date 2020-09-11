@@ -45,7 +45,8 @@ exports.mbfdemo_brandfolder = function (request, response) {
       list_filetypes: require('./converseai_modules/list_filetypes'),
       search_assets: require('./converseai_modules/search_assets'),
       list_tags: require('./converseai_modules/list_tags'),
-      get_attachments: require('./converseai_modules/get_attachments')
+      get_attachments: require('./converseai_modules/get_attachments'),
+      create_asset: require('./converseai_modules/create_asset')
     });
 
 

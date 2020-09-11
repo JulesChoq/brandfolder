@@ -16,5 +16,19 @@
     "express": "4.16.1",
     "mocha": "4.0.0",
     "supertest": "3.0.0"
-  }
+  },
+  "version": "1.0.0",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JulesChoq/brandfolder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JulesChoq/brandfolder/issues"
+  },
+  "homepage": "https://github.com/JulesChoq/brandfolder#readme"
 }
